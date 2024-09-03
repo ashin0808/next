@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -17,9 +17,6 @@ model schedule {
   round            Int
   home_team        team   @relation("home_team", fields: [home_team_id], references: [id])
   visiting_team    team   @relation("visiting_team", fields: [visiting_team_id], references: [id])
-
-  @@index([home_team_id], map: "schedule_home_team_id_fkey")
-  @@index([visiting_team_id], map: "schedule_visiting_team_id_fkey")
 }
 
 model team {
