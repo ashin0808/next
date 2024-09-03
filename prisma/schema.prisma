@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model schedule {
+  id               Int    @id @default(autoincrement())
+  date             String @default("") @db.VarChar(255)
+  home_team_id     Int
+  visiting_team_id Int
+  home_score       Int    @default(0)
+  visiting_score   Int    @default(0)
+  round            Int
+  home_team        team   @relation("home_team", fields: [home_team_id], references: [id])
+  visiting_team    team   @relation("visiting_team", fields: [visiting_team_id], references: [id])
+
+  @@index([home_team_id], map: "schedule_home_team_id_fkey")
+  @@index([visiting_team_id], map: "schedule_visiting_team_id_fkey")
+}
+
+model team {
+  id                 Int        @id @default(autoincrement())
+  name               String     @default("") @db.VarChar(255)
+  group_first_code   String     @default("") @db.VarChar(255)
+  group_first_name   String     @default("") @db.VarChar(255)
+  home_schedules     schedule[] @relation("home_team")
+  visiting_schedules schedule[] @relation("visiting_team")
+}
