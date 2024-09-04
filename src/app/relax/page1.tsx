@@ -22,10 +22,10 @@ type CommentList = {
 
 export default function Relax() {
   const [form, setForm] = useState({
-    feedId: "4424596",
-    sign: "0a0ca6365f60a0677d187bbb1185872b",
-    token: "b210d9ea-1223-41ba-93b7-ef0a9d9e555b",
-    customname: "075ae0b7-fcd0-408e-bbd0-fb4b1c47d3cf",
+    feedId: "4459522",
+    sign: "3996778fafa728a47dd8b78d0666ab50",
+    token: "59cc0491-4687-4942-9702-c8365d7688ab",
+    customname: "80dd13d5-5019-40b6-b969-fc7680049671",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ export default function Relax() {
   const getData = async () => {
     setCommentStatus('loading');
     try {
-      const res = await fetch(`/api/cloud_community?feedId=${form.feedId}&sign=${form.sign}&token=${form.token}&customname=${form.customname}`);
+      const res = await fetch(`/relax/cloud_community?feedId=${form.feedId}&sign=${form.sign}&token=${form.token}&customname=${form.customname}`);
       if (!res.ok) {
         setCommentStatus('empty');
         throw new Error('Failed to fetch data');
