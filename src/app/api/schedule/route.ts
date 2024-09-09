@@ -28,6 +28,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const res = await req.json()
+  console.log("res", res);
+  
   const data = await prisma.schedule.create({
     data: res,
   });
