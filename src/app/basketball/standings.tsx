@@ -36,8 +36,6 @@ type TeamGroup = {
   }[];
 };
 
-export const dynamic = 'force-dynamic'
-
 export default async function Standings() {
   // 查询所有队伍
   const teams = await prisma.team.findMany({});
